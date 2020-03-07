@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Modal from 'react-modal';
+
+import { clearSelectedOption } from '../actions/selectedOption';
 
 Modal.setAppElement('#root');
 
@@ -29,9 +32,17 @@ const DecisionModal = props => {
           🐷
         </span>
       </p>
-      <button onClick={props.handleClearSelectedItem}>좋아</button>
+      <button onClick={props.clearSelectedOption}>좋아</button>
     </Modal>
   );
 };
 
-export default DecisionModal;
+const mapStateToProps = state => ({
+  selectedOption: state.selectedOption
+});
+
+const mapDispatchToProps = {
+  clearSelectedOption
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DecisionModal);

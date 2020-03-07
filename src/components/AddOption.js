@@ -1,12 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const AddOption = props => {
+import { addOption } from '../actions/options';
+
+const AddOption = ({ options, addOption }) => {
   const handleSubmit = event => {
     event.preventDefault();
 
     const newOption = event.target.elements.option.value.trim();
 
-    props.addNewOption(newOption);
+    if (newOption && !options.includes(newOption)) {
+      addOption(newOption);
+    }
+
     event.target.elements.option.value = '';
   };
 
@@ -18,4 +24,12 @@ const AddOption = props => {
   );
 };
 
-export default AddOption;
+const mapStateToProps = state => ({
+  options: state.options
+});
+
+const mapDispatchToProps = {
+  addOption
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddOption);

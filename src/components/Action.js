@@ -1,13 +1,30 @@
 import React from 'react';
 
-const Action = props => {
+import { connect } from 'react-redux';
+import { setSelectedOption } from '../actions/selectedOption';
+
+const Action = ({ options, setSelectedOption }) => {
+  const handlePick = () => {
+    const randomIndex = Math.floor(Math.random() * options.length);
+
+    setSelectedOption(options[randomIndex]);
+  };
+
   return (
     <div>
-      <button disabled={!props.hasOptions} onClick={props.handlePick}>
+      <button disabled={options.length === 0} onClick={handlePick}>
         정해줘
       </button>
     </div>
   );
 };
 
-export default Action;
+const mapStateToProps = state => ({
+  options: state.options
+});
+
+const mapDispatchToProps = {
+  setSelectedOption
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Action);
