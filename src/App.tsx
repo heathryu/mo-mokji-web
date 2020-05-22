@@ -7,29 +7,29 @@ import AddOption from './components/AddOption';
 import DecisionModal from './components/DecisionModal';
 
 const App = () => {
-  const [items, setItems] = useState([]);
-  const [selectedItem, setSelectedItem] = useState();
+  const [items, setItems] = useState<string[]>([]);
+  const [selectedItem, setSelectedItem] = useState<string | undefined>();
 
-  const handlePick = () => {
+  const handlePick: React.MouseEventHandler<HTMLButtonElement> = () => {
     const randomIndex = Math.floor(Math.random() * items.length);
     setSelectedItem(items[randomIndex]);
   };
 
-  const clearSelectedItem = () => {
+  const clearSelectedItem: React.MouseEventHandler<HTMLButtonElement> = () => {
     setSelectedItem(undefined);
   };
 
-  const addNewItem = newItem => {
+  const addNewItem = (newItem: string) => {
     if (newItem && !items.includes(newItem)) {
       setItems(items.concat(newItem));
     }
   };
 
-  const removeItem = itemToRemove => {
-    setItems(items.filter(item => item !== itemToRemove));
+  const removeItem = (itemToRemove: string) => {
+    setItems(items.filter((item) => item !== itemToRemove));
   };
 
-  const removeAllItems = () => {
+  const removeAllItems: React.MouseEventHandler<HTMLButtonElement> = () => {
     setItems([]);
   };
 

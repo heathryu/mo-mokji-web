@@ -3,10 +3,18 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-const DecisionModal = props => {
+type DecisionModalProps = {
+  selectedOption: string | undefined;
+  handleClearSelectedItem: React.MouseEventHandler<HTMLButtonElement>;
+};
+
+const DecisionModal: React.FC<DecisionModalProps> = ({
+  selectedOption,
+  handleClearSelectedItem,
+}) => {
   return (
     <Modal
-      isOpen={!!props.selectedOption}
+      isOpen={!!selectedOption}
       contentLabel="Selected Option"
       style={{
         overlay: {},
@@ -18,18 +26,18 @@ const DecisionModal = props => {
           bottom: 0,
           left: '3rem',
           right: '3rem',
-          padding: 0
-        }
+          padding: 0,
+        },
       }}
     >
       <h3>오늘은..</h3>
       <p>
-        {props.selectedOption} 먹자{' '}
+        {selectedOption} 먹자{' '}
         <span role="img" aria-label="pig">
           🐷
         </span>
       </p>
-      <button onClick={props.handleClearSelectedItem}>좋아</button>
+      <button onClick={handleClearSelectedItem}>좋아</button>
     </Modal>
   );
 };

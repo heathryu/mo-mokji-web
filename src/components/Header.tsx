@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <div>
       <h1>
-        뭐 먹지?{' '}
+        뭐 먹지?{" "}
         <span role="img" aria-label="pig">
           🐷
         </span>
